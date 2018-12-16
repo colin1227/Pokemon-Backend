@@ -19,7 +19,7 @@ app.use(express.static('public'));
 const viewController = require("./controllers/viewPokes");
 const gameController = require("./controllers/game");
 app.use("/game", gameController);
-app.use("/view", viewController);
+app.use("/crud", viewController);
 
 
 const server = app.listen(port, (err)=>{

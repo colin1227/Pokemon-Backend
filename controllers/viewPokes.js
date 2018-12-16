@@ -55,4 +55,25 @@ router.post("/new-pokemon", async(req, res) => {
     };
 });
 
+router.post("/update-pokemon", async(req, res) => {
+    try{
+        const newPoke = await Pokemon.findOneAndUpdate(req.body.name,{
+            name: req.body.name,
+            img: req.body.img,
+            damage: req.body.damage
+        });
+        console.log(newPoke);
+        res.json({
+            message: `${req.body.name} edit`,
+            data: newPoke,
+            status: 200
+        });
+    }
+    catch(err){
+        res.json({
+            error: err,
+            status: 500
+        });
+    };
+});
 module.exports = router;
