@@ -3,11 +3,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 require("./db/db.js")
 
 const corsOptions = {
-    origin: "http://localhost:3000",
+    origin: "https://adoring-joliot-0f8029.netlify.com",
     optionsSuccess: 200
 }
 
@@ -22,7 +22,7 @@ app.use("/game", gameController);
 app.use("/crud", viewController);
 
 
-const server = app.listen(port, (err)=>{
+const server = app.listen(port, ()=>{
     console.log(`listening on port ${port}`)
 })
 
@@ -38,5 +38,7 @@ const server = app.listen(port, (err)=>{
 // })
 
 app.get("/", (req, res) =>{
-     res.render("homePage.ejs")
+     res.json({
+         data: "you shouldn't be seeing this"
+     })
 })

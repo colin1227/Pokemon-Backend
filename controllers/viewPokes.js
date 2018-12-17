@@ -19,7 +19,6 @@ router.get("/grabPokemon", async(req, res) => {
 
 router.post("/baseInjection", async(req, res) => {
     try{
-        console.log("asdf1234")
         await Pokemon.insertMany(req.body.pokemon);
         res.json({
             status: 200
@@ -36,13 +35,12 @@ router.post("/baseInjection", async(req, res) => {
 router.post("/new-pokemon", async(req, res) => {
     try{
         const newPoke = await Pokemon.create({
-            name: req.body.name,
-            img: req.body.img,
-            damage: req.body.damage
+            name: req.body.PokeToAddName,
+            img: req.body.PokeToAddImg,
+            damage: req.body.PokeToAddDamage
         });
-        console.log(newPoke);
         res.json({
-            message: `${req.body.name} added to the game`,
+            message: `${newPoke.name} added to the game`,
             data: newPoke,
             status: 200
         });
@@ -57,14 +55,13 @@ router.post("/new-pokemon", async(req, res) => {
 
 router.post("/update-pokemon", async(req, res) => {
     try{
-        const newPoke = await Pokemon.findOneAndUpdate(req.body.name,{
-            name: req.body.name,
-            img: req.body.img,
-            damage: req.body.damage
+        const updatedPoke = await Pokemon.findOneAndUpdate(req.body.PokeToEditName,{
+            name: req.body.PokeToEditName,
+            img: req.body.PokeToEditImg,
+            damage: req.body.PokeToEditDamage
         });
-        console.log(newPoke);
         res.json({
-            message: `${req.body.name} edit`,
+            message: `${updatedPoke.name} edit`,
             data: newPoke,
             status: 200
         });
@@ -76,4 +73,5 @@ router.post("/update-pokemon", async(req, res) => {
         });
     };
 });
+
 module.exports = router;
