@@ -7,8 +7,17 @@ const port = process.env.PORT || 8000;
 require("dotenv").config();
 require("./db/db.js")
 
+const whitelist = ["https://adoring-joliot-0f8029.netlify.com","http://localhost:3000"]
+
 const corsOptions = {
-    origin: "https://adoring-joliot-0f8029.netlify.com",
+    origin: function(origin, callback){
+        if (whitelist.indexOf(origin) !== -1){
+            callback(null, true)
+        }
+        else {
+            return false;
+        }
+    },
     optionsSuccess: 200
 }
 
