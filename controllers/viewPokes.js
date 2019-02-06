@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Pokemon = require("./../models/pokemon");
 
+//grabs all pokemon
 router.get("/grabPokemon", async(req, res) => {
     try{
     const allPokes = await Pokemon.find();
@@ -17,6 +18,7 @@ router.get("/grabPokemon", async(req, res) => {
     };
 });
 
+// adds all pokemon back in to game
 router.post("/baseInjection", async(req, res) => {
     try{
         await Pokemon.insertMany(req.body.pokemon);
@@ -32,6 +34,7 @@ router.post("/baseInjection", async(req, res) => {
     };
 });
 
+// adds new pokemon into game
 router.post("/new-pokemon", async(req, res) => {
     try{
         const newPoke = await Pokemon.create({
@@ -53,6 +56,7 @@ router.post("/new-pokemon", async(req, res) => {
     };
 });
 
+//updates pokemon
 router.post("/update-pokemon", async(req, res) => {
     try{
         const updatedPoke = await Pokemon.findOneAndUpdate(req.body.PokeToEditName,{

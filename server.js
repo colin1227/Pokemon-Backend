@@ -36,16 +36,6 @@ const server = app.listen(port, ()=>{
     console.log(`listening on port ${port}`)
 })
 
-// const io = socket(server);
-// let ids = [];
-// io.on("connection", (socket) =>{
-//     ids.push(socket.id)
-//     console.log('made socket connection', socket.id)
-//     socket.on("disconnect", () => {
-//         ids.filter(id => id === socket.id)
-//         console.log(`${socket.id} left`)
-// })
-// })
 
 app.get("/", (req, res) =>{
      res.json({
